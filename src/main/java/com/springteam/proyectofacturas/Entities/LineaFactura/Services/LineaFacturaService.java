@@ -1,4 +1,7 @@
 package com.springteam.proyectofacturas.Entities.LineaFactura.Services;
 
-public class LineaFacturaService {
+import org.springframework.stereotype.Component;
+
+@Component
+public class LineaFacturaService implements ILineaFacturaService{
 }

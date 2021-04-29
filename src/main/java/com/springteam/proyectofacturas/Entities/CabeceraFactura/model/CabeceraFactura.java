@@ -1,7 +1,7 @@
-package com.springteam.proyectofacturas.Entities.CabeceraFactura;
+package com.springteam.proyectofacturas.Entities.CabeceraFactura.model;
 
-import com.springteam.proyectofacturas.Entities.Cliente.Cliente;
-import com.springteam.proyectofacturas.Entities.LineaFactura.LineaFactura;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.springteam.proyectofacturas.Entities.Cliente.Model.Cliente;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,7 +9,6 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity
@@ -25,6 +24,7 @@ public class CabeceraFactura {
     private String numFactura;
 
 
+    @JsonFormat(pattern = "MM/dd/yyyy")
     private Date fecha;
 
     @NonNull

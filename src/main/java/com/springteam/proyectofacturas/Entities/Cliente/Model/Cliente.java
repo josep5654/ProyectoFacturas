@@ -1,4 +1,5 @@
-package com.springteam.proyectofacturas.Entities.Producto;
+package com.springteam.proyectofacturas.Entities.Cliente.Model;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,9 +13,11 @@ import javax.persistence.Id;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Producto {
+public class Cliente {
+
     @Id
     @GeneratedValue
     private int id;
-    private String nombreProducto;
+    private String nombreCliente;
+
 }

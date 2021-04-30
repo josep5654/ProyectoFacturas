@@ -1,5 +1,6 @@
 package com.springteam.proyectofacturas.Entities.Cliente.Services;
 
+import com.springteam.proyectofacturas.Entities.CabeceraFactura.model.CabeceraFactura;
 import com.springteam.proyectofacturas.Entities.Cliente.Model.Cliente;
 import com.springteam.proyectofacturas.Entities.Cliente.Model.ClienteDTO;
 import javassist.NotFoundException;
@@ -34,12 +35,17 @@ public class ClienteService implements IClienteService
     @Override
     public List<ClienteDTO> getClientes()
     {
-        return null;
+        List dto = new ArrayList();
+        dto.addAll(clienteReporitory.findAll());
+        return dto;
     }
+
+    private double importe = 0;
 
     @Override
     public List getCliente(Integer id)
     {
+        importe = 0;
         //Controlador GET /cliente/{id} -> Listado detodaslas facturas de un cliente (List<Numero factura,fecha facturae importe factura>)
         List devolver = new ArrayList();
         try
@@ -48,9 +54,20 @@ public class ClienteService implements IClienteService
             if(!clienete.isEmpty())
             {
                 devolver.add(clienete.get().getNombreCliente());
-                String idFactura = clienete.get().getCabeceras().get(0).getNumFactura();
+
+                //String idFactura = clienete.get().getCabeceras().get(0).getNumFactura();
+                clienete.get()
+                        .getCabeceras()
+                        .forEach(
+                                cabecera ->
+                                {
+                                    devolver.add(cabecera.getNumFactura());
+                                    devolver.add(cabecera.getFecha());
+                                    cabecera.getLineaFacturas().forEach(linea -> devolver.add(linea.getProducto().getNombreProducto()));
+                                    cabecera.getLineaFacturas().forEach(linea -> {importe += linea.getCantidad()*linea.getPrecio();});
+                                    devolver.add(importe);
+                                });
                 //buscar lineas de factura
-                System.err.println(idFactura);
             }
             else
             {
@@ -94,6 +111,10 @@ public class ClienteService implements IClienteService
     {
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombreCliente(clienteDTO.getNombreCliente());
+        if(!clienteDTO.getCabeceraFacturas().isEmpty())
+        {
+            nuevoCliente.setAllCabeceras(clienteDTO.getCabeceraFacturas());
+        }
         clienteReporitory.saveAndFlush(nuevoCliente);
     }
 }

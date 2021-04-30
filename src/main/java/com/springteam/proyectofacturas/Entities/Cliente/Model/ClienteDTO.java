@@ -12,6 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class ClienteDTO
 {
-    private int id;
     private String nombreCliente;
+
+    private List<CabeceraFactura> cabeceraFacturas;
 }

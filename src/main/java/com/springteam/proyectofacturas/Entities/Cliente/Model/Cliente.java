@@ -7,10 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -24,8 +21,13 @@ public class Cliente {
     private int id;
     private String nombreCliente;
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private List<CabeceraFactura> cabeceras;
+
+    public void setAllCabeceras(List<CabeceraFactura> cabeceras)
+    {
+        cabeceras.addAll(cabeceras);
+    }
 
     public void setCabeceras(CabeceraFactura cabecera)
     {

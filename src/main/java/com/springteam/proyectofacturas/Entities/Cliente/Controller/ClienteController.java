@@ -26,7 +26,7 @@ public class ClienteController
     @GetMapping("/ver")
     private List getClientes()
     {
-        return serviceClint.getAllClientes();
+        return serviceClint.getClientes();
     }
 
     @PostMapping("/add")

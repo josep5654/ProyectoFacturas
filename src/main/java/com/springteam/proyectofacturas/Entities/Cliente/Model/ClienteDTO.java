@@ -9,5 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClienteDTO
 {
+    private int id;
     private String nombreCliente;
 }

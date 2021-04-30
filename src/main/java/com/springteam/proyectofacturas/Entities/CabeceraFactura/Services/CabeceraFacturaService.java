@@ -65,12 +65,12 @@ public class CabeceraFacturaService implements ICabeceraService{
 
     @Override
     public void deleteCabecera(Integer id) {
-
+        //TODO implement
     }
 
     @Override
     public void createCabecera( CabeceraFacturaDTO cabeceraFacturaDTO) {
-
+        //TODO implement
     }
 
 }

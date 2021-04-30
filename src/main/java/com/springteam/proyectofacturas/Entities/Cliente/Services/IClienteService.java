@@ -7,9 +7,8 @@ import javassist.NotFoundException;
 
 import java.util.List;
 
-public interface IClienteService {
-
-
+public interface IClienteService
+{
     public ClienteDTO getClienteById(Integer id) throws NotFoundException;
 
 
@@ -25,5 +24,6 @@ public interface IClienteService {
     public void deleteCliente(Integer id);
     public void createCliente(ClienteDTO clienteDTO);
 
-
+    public List getCliente(Integer id);
+    public List<ClienteDTO> getClientes();
 }

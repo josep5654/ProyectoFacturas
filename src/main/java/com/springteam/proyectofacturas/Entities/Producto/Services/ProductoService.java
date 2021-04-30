@@ -45,15 +45,28 @@ public class ProductoService implements IProductoService{
     @Override
     public void updateLineaProducto(Integer id, ProductoDTO productoDTO) throws NotFoundException {
 
+        Producto producto = productoRepository.findById(id).map(producto1 -> {
+            producto1.setNombreProducto(productoDTO.getNombreProducto());
+
+            return productoRepository.save(producto1);
+        }).
+                orElseThrow(()-> new NotFoundException("No se ha encontrado el producto"));
     }
 
     @Override
     public void deleteLineaProducto(Integer id) {
+
+        try {
+            productoRepository.deleteById(id);
+        } catch (Exception e) {
+            System.out.println("Error al borrar: "+e.getMessage());
+        }
 
     }
 
     @Override
     public void createLineaProducto(ProductoDTO productoDTO) {
 
+        Producto nuevoProducto = new Producto(productoDTO.getNombreProducto());
     }
 }

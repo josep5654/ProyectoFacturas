@@ -6,10 +6,7 @@ import com.springteam.proyectofacturas.Entities.Producto.Services.ProductoReposi
 import com.springteam.proyectofacturas.Entities.Producto.Services.ProductoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,14 +20,26 @@ public class ProductoController {
     ProductoService productoService;
 
 
-    @GetMapping
+    @GetMapping("/")
     public List<ProductoDTO> getAllProductos(){
     return productoService.getAllLineaProductos();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ProductoDTO getProdutobyID(@PathVariable Integer id)throws NotFoundException {
 
         return productoService.getProductoByID(id);
+    }
+    @PostMapping
+    public void postProducto(@RequestBody ProductoDTO productoDTO){
+        productoService.createLineaProducto(productoDTO);
+    }
+    @DeleteMapping("/{id}")
+    public void deleteProducto(@PathVariable int id){
+        productoService.deleteLineaProducto(id);
+    }
+    @PutMapping("/{id}")
+    public void updateProducto(@PathVariable int id,@RequestBody ProductoDTO productoDTO) throws NotFoundException {
+        productoService.updateLineaProducto(id,productoDTO);
     }
 }

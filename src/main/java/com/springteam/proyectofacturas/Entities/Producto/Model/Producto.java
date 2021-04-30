@@ -19,4 +19,8 @@ public class Producto {
     private int id;
     @NotNull
     private String nombreProducto;
+
+    public Producto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
 }

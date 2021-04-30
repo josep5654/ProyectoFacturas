@@ -1,6 +1,7 @@
 package com.springteam.proyectofacturas.Entities.Producto.Services;
 
 
+import com.springteam.proyectofacturas.Entities.Producto.Model.Producto;
 import com.springteam.proyectofacturas.Entities.Producto.Model.ProductoDTO;
 import javassist.NotFoundException;
 

@@ -33,7 +33,7 @@ public class CabeceraFacturaController {
 
     @PostMapping("/")
     public String addCabecera(@RequestBody CabeceraFacturaDTO cabeceraFacturaDTO)  {
-
+         cabeceraService.createCabecera(cabeceraFacturaDTO);
 
         return "ok";
     }

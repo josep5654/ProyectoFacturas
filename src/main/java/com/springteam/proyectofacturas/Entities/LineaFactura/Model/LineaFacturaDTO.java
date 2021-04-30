@@ -1,6 +1,7 @@
 package com.springteam.proyectofacturas.Entities.LineaFactura.Model;
 
 import com.springteam.proyectofacturas.Entities.CabeceraFactura.model.CabeceraFactura;
+import com.springteam.proyectofacturas.Entities.CabeceraFactura.model.CabeceraFacturaDTO;
 import com.springteam.proyectofacturas.Entities.Producto.Model.Producto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +13,7 @@ public class LineaFacturaDTO {
 
 
     private Integer id;
-    private CabeceraFactura cabeceraFactura;
+    private CabeceraFacturaDTO cabeceraFactura;
     private Producto producto;
     private Integer cantidad;
     private Integer precio;

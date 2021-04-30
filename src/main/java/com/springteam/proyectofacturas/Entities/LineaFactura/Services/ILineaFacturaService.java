@@ -11,7 +11,7 @@ import java.util.List;
 public interface ILineaFacturaService {
 
     public LineaFacturaDTO getLineaFacturaById(Integer id) throws NotFoundException;
-    public LineaFacturaDTO getLineaFacturaByHeader(CabeceraFacturaDTO cabeceraFacturaDTO) throws NotFoundException;
+    public List<LineaFacturaDTO> getLineaFacturaByHeader(Integer cabeceraFacturaId) throws NotFoundException;
     public List<LineaFacturaDTO> getAllLineaFacturas();
     public void updateLineaFactura(Integer id,LineaFacturaDTO lineaFacturaDTO) throws NotFoundException;
     public void deleteLineaFactura(Integer id);

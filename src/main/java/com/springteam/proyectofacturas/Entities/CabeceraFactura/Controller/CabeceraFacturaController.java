@@ -24,7 +24,6 @@ public class CabeceraFacturaController {
         }catch (NotFoundException e){
             return null;
         }
-
     }
     @GetMapping("/")
     public List<CabeceraFacturaDTO> getAllCabecera(@PathVariable String id)  {

@@ -44,9 +44,23 @@ public class ClienteService implements IClienteService
         List devolver = new ArrayList();
         try
         {
-            this.getClienteById(id);
+            Optional<Cliente> clienete = clienteReporitory.findById(id);
+            if(!clienete.isEmpty())
+            {
+                devolver.add(clienete.get().getNombreCliente());
+                String idFactura = clienete.get().getCabeceras().get(0).getNumFactura();
+                //buscar lineas de factura
+                System.err.println(idFactura);
+            }
+            else
+            {
+                System.err.println("Cliente inexistente");
+            }
         }
-        catch (Exception e){}
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
         return  null;
     }
 
@@ -54,7 +68,7 @@ public class ClienteService implements IClienteService
     public void updateCliente(Integer id, ClienteDTO clienteDTO) throws NotFoundException
     {
         Optional<Cliente> cliente = clienteReporitory.findById(id);//.orElseThrow(System.err.println("ERROR"));
-        if(!cliente.isEmpty())
+        if(cliente.isEmpty())
         {
             Cliente nuevoCliente = cliente.get();
             nuevoCliente.setNombreCliente(clienteDTO.getNombreCliente());

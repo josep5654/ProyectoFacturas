@@ -17,11 +17,11 @@ import java.util.List;
 public class Cliente {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nombreCliente;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
+    @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "cliente")
     private List<CabeceraFactura> cabeceras;
 
     public void setAllCabeceras(List<CabeceraFactura> cabeceras)

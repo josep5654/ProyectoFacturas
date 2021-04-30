@@ -20,7 +20,7 @@ public class LineaFactura {
     @GeneratedValue
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     private CabeceraFactura cabeceraFactura;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -32,4 +32,5 @@ public class LineaFactura {
 
     @NonNull
     private Integer precio;
+    
 }

@@ -1,4 +1,7 @@
 package com.springteam.proyectofacturas.Entities.Producto.Services;
 
-public interface ProductoRepository {
+import com.springteam.proyectofacturas.Entities.Producto.Model.Producto;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProductoRepository extends JpaRepository<Producto,Integer> {
 }

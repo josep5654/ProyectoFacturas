@@ -1,5 +1,6 @@
 package com.springteam.proyectofacturas.Entities.Producto.Model;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,5 +17,6 @@ public class Producto {
     @Id
     @GeneratedValue
     private int id;
+    @NotNull
     private String nombreProducto;
 }

@@ -11,6 +11,7 @@ public interface IProductoService {
     public ProductoDTO getProductoById(Integer id) throws NotFoundException;
 
     public List<ProductoDTO> getAllLineaProductos();
+    public ProductoDTO getProductoByID(int id) throws NotFoundException;
     public void updateLineaProducto(Integer id,ProductoDTO productoDTO) throws NotFoundException;
     public void deleteLineaProducto(Integer id);
     public void createLineaProducto(ProductoDTO productoDTO);

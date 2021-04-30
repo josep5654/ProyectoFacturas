@@ -3,6 +3,7 @@ package com.springteam.proyectofacturas.Entities.Producto.Controller;
 import com.springteam.proyectofacturas.Entities.Producto.Model.Producto;
 import com.springteam.proyectofacturas.Entities.Producto.Model.ProductoDTO;
 import com.springteam.proyectofacturas.Entities.Producto.Services.ProductoRepository;
+import com.springteam.proyectofacturas.Entities.Producto.Services.ProductoService;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,26 +20,17 @@ import java.util.stream.Collectors;
 public class ProductoController {
 
     @Autowired
-    ProductoRepository productoRepository;
+    ProductoService productoService;
 
 
     @GetMapping
     public List<ProductoDTO> getAllProductos(){
-    List<Producto> productosList= productoRepository.findAll();
-    List<ProductoDTO> productoDTOSList= productosList.stream().map(
-            productos -> new ProductoDTO(productos.getNombreProducto()))
-            .collect(Collectors.toList());
-
-    return productoDTOSList;
+    return productoService.getAllLineaProductos();
     }
 
     @GetMapping("{id}")
-    public Optional<Producto> getProdutobyID(@PathVariable Integer id)throws NotFoundException {
+    public ProductoDTO getProdutobyID(@PathVariable Integer id)throws NotFoundException {
 
-       // List<Producto> productoid= productoRepository.findAllById(id) ;
-
-       // ProductoDTO productoDTO= new ProductoDTO(productoRepository.findById(id));
-
-        return productoRepository.findById(id) ;
+        return productoService.getProductoByID(id);
     }
 }

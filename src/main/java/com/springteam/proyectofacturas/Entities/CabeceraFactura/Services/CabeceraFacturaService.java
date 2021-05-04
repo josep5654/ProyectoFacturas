@@ -69,8 +69,10 @@ public class CabeceraFacturaService implements ICabeceraService{
     }
 
     @Override
-    public void deleteCabecera(Integer id) {
-        //TODO implement
+    public void deleteCabecera(Integer id) throws NotFoundException {
+        CabeceraFactura cabeceraFactura = cabeceraFacturaRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("Cabecera Factura not found"));
+        cabeceraFacturaRepository.delete(cabeceraFactura);
     }
 
     @Override

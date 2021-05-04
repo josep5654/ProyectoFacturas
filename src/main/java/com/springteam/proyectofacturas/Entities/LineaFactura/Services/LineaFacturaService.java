@@ -19,6 +19,8 @@ public class LineaFacturaService implements ILineaFacturaService{
     public LineaFacturaDTO getLineaFacturaById(Integer id) throws NotFoundException {
         LineaFactura lineaFactura = lineaFacturaRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("Linea Factura not found"));
+        LineaFacturaDTO lineaFacturaDTO = new LineaFacturaDTO();
+        //TODO terminar
         return null;
     }
 

@@ -78,7 +78,7 @@ public class ClienteService implements IClienteService
         {
             System.err.println(e.getMessage());
         }
-        return  null;
+        return  devolver;
     }
 
     @Override

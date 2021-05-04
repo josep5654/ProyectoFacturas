@@ -17,7 +17,7 @@ public class LineaFactura {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @ManyToOne(cascade = {CascadeType.ALL})

@@ -1,8 +1,10 @@
 package com.springteam.proyectofacturas.Entities.Cliente.Services;
 
+import ch.qos.logback.core.net.server.Client;
 import com.springteam.proyectofacturas.Entities.CabeceraFactura.model.CabeceraFactura;
 import com.springteam.proyectofacturas.Entities.Cliente.Model.Cliente;
 import com.springteam.proyectofacturas.Entities.Cliente.Model.ClienteDTO;
+import com.springteam.proyectofacturas.Entities.LineaFactura.Model.LineaFactura;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -61,12 +63,13 @@ public class ClienteService implements IClienteService
                         .forEach(
                                 cabecera ->
                                 {
+                                    importe = 0;
                                     devolver.add(cabecera.getNumFactura());
                                     devolver.add(cabecera.getFecha());
                                     cabecera.getLineaFacturas().forEach(linea -> devolver.add(linea.getProducto().getNombreProducto()));
                                     cabecera.getLineaFacturas().forEach(linea -> {importe += linea.getCantidad()*linea.getPrecio();});
+                                    devolver.add(importe);
                                 });
-                devolver.add(importe);
                 //buscar lineas de factura
             }
             else
@@ -111,10 +114,51 @@ public class ClienteService implements IClienteService
     {
         Cliente nuevoCliente = new Cliente();
         nuevoCliente.setNombreCliente(clienteDTO.getNombreCliente());
-        if(!clienteDTO.getCabeceraFacturas().isEmpty())
+        if(comprobarCliente(nuevoCliente) == false)
         {
-            nuevoCliente.setAllCabeceras(clienteDTO.getCabeceraFacturas());
+            if(!clienteDTO.getCabeceraFacturas().isEmpty())
+            {
+                List<CabeceraFactura> lista = clienteDTO.getCabeceraFacturas();
+                lista.forEach(c->
+                {
+                    if(c.getCliente() == null)
+                    {
+                        c.setCliente(nuevoCliente);
+                    }
+                    //if(c.getNumFactura().trim().length() == 0)
+                    {
+                        c.setNumFactura(""+c.getId());
+                    }
+                    c.getLineaFacturas().forEach(l -> l.setCabeceraFactura(c));
+                });
+
+                nuevoCliente.setCabeceras(lista);
+            }
+            clienteReporitory.saveAndFlush(nuevoCliente);
         }
-        clienteReporitory.saveAndFlush(nuevoCliente);
+    }
+
+    private boolean comprobarCliente(Cliente cliente)
+    {
+        boolean[] existe = {false};
+        try
+        {
+            clienteReporitory.findAll()
+                    .stream().forEach(cli ->
+                    {
+                        if(cli.getNombreCliente().equalsIgnoreCase(cliente.getNombreCliente()))
+                        {
+                            if(cliente.getCabeceras().isEmpty() == false)
+                            {
+                                cliente.getCabeceras().stream().forEach(f -> {if(f.getNumFactura().trim().length() == 0){f.setNumFactura(f.getId()+"");}});
+                                cli.addListacabeceras(cliente.getCabeceras());
+                                cli.getCabeceras().stream().forEach(c -> {if(c.getCliente() == null){c.setCliente(cli);}});
+                            }
+                            existe[0] = true;
+                        }
+                    });
+        }
+        catch (Exception e){System.err.println(e.getMessage());}
+        return existe[0];
     }
 }

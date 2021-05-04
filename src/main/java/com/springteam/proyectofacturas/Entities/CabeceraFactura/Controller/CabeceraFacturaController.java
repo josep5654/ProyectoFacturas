@@ -38,9 +38,16 @@ public class CabeceraFacturaController {
         return "ok";
     }
     @DeleteMapping("/{id}")
-    public String removeCabecera(@PathVariable String id)  {
-
-        cabeceraService.deleteCabecera(Integer.parseInt(id));
+    public String removeCabecera(@PathVariable String id)
+    {
+        try
+        {
+            cabeceraService.deleteCabecera(Integer.parseInt(id));
+        }
+        catch (Exception e)
+        {
+            System.err.println(e.getMessage());
+        }
 
         return "ok";
     }

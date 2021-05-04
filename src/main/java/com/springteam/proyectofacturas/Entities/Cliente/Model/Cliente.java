@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -22,15 +23,11 @@ public class Cliente {
     private String nombreCliente;
 
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "cliente")
-    private List<CabeceraFactura> cabeceras;
+    private List<CabeceraFactura> cabeceras = new ArrayList<>();
 
-    /**public void setAllCabeceras(List<CabeceraFactura> cabeceras)
+    public void addListacabeceras(List<CabeceraFactura> cabeceras)
     {
         cabeceras.addAll(cabeceras);
     }
 
-    public void setCabeceras(CabeceraFactura cabecera)
-    {
-        cabeceras.add(cabecera);
-    }*/
 }

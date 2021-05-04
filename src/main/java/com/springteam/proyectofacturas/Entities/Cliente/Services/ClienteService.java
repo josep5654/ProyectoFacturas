@@ -65,8 +65,8 @@ public class ClienteService implements IClienteService
                                     devolver.add(cabecera.getFecha());
                                     cabecera.getLineaFacturas().forEach(linea -> devolver.add(linea.getProducto().getNombreProducto()));
                                     cabecera.getLineaFacturas().forEach(linea -> {importe += linea.getCantidad()*linea.getPrecio();});
-                                    devolver.add(importe);
                                 });
+                devolver.add(importe);
                 //buscar lineas de factura
             }
             else

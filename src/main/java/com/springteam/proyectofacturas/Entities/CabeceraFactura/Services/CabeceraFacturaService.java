@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CabeceraFacturaService implements ICabeceraService{
@@ -38,8 +39,12 @@ public class CabeceraFacturaService implements ICabeceraService{
         dto.setNumFactura(cabeceraFactura.getNumFactura());
         dto.setFecha(cabeceraFactura.getFecha());
 
-        List<LineaFacturaDTO> lineaFacturaDTOS = lineaFacturaService.getLineaFacturaByHeader(cabeceraFactura.getId());
-        dto.setLineas(lineaFacturaDTOS);
+
+        List<LineaFacturaDTO> lineas = cabeceraFactura.getLineaFacturas().stream().map(
+                lineaFactura-> new LineaFacturaDTO(dto,lineaFactura.getProducto(),lineaFactura.getCantidad(),lineaFactura.getPrecio()))
+                .collect(Collectors.toList());
+
+        dto.setLineas(lineas);
         dto.setCliente(clienteService.getClienteById(cabeceraFactura.getCliente().getId()));
 
         return dto;

@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class LineaFacturaDTO {
 
 
-    private Integer id;
     private CabeceraFacturaDTO cabeceraFactura;
     private Producto producto;
     private Integer cantidad;

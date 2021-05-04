@@ -24,7 +24,7 @@ public class Cliente {
     @OneToMany(cascade = {CascadeType.ALL}, mappedBy = "cliente")
     private List<CabeceraFactura> cabeceras;
 
-    public void setAllCabeceras(List<CabeceraFactura> cabeceras)
+    /**public void setAllCabeceras(List<CabeceraFactura> cabeceras)
     {
         cabeceras.addAll(cabeceras);
     }
@@ -32,5 +32,5 @@ public class Cliente {
     public void setCabeceras(CabeceraFactura cabecera)
     {
         cabeceras.add(cabecera);
-    }
+    }*/
 }
